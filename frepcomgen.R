@@ -1,31 +1,38 @@
-frepcomgen <- function(m, n) {
-  # Generăm matrice aleatoare pentru variabila X și Y cu maxim 3 zecimale
-  p_X <- round(matrix(runif(m * n), nrow = m, ncol = n), 5)
-  p_Y <- round(matrix(runif(m * n), nrow = m, ncol = n), 5)
+frepcomgen <- function(n, m) {
+  # Creați o matrice n x m cu valori aleatoare între 0 și 1
+  repartitie_comuna <- matrix(runif(n * m), nrow = n, ncol = m)
   
-  # Calculăm repartiția marginală a variabilei X și o normalizăm
-  p_X_marginal <- rowSums(p_X, na.rm = TRUE)
-  p_X_marginal <- round(p_X_marginal / sum(p_X_marginal, na.rm = TRUE), 5)
+  # Normalizați valorile astfel încât suma tuturor valorilor să fie 1
+  repartitie_comuna <- repartitie_comuna / sum(repartitie_comuna)
+  repartitie_comuna <- round(repartitie_comuna, 3)
   
-  # Calculăm repartiția marginală a variabilei Y și o normalizăm
-  p_Y_marginal <- colSums(p_Y, na.rm = TRUE)
-  p_Y_marginal <- round(p_Y_marginal / sum(p_Y_marginal, na.rm = TRUE), 5)
+  # Calculați sumele pentru fiecare linie și fiecare coloană
+  rep_marginal_x <- round(rowSums(repartitie_comuna), 3)
+  rep_marginal_y <- round(colSums(repartitie_comuna), 3)
   
-  # Construim tabelul cu repartiția comună și îl rotunjim la 3 zecimale
-  p_XY_comuna <- round(p_X_marginal %*% t(p_Y_marginal), 5)
+  # Normalizați sumele pentru fiecare linie și fiecare coloană astfel încât ele să fie 1
+  rep_marginal_x <- round(rep_marginal_x / sum(rep_marginal_x),3)
+  rep_marginal_y <- round(rep_marginal_y / sum(rep_marginal_y),3)
   
-  # Setăm aleator unele elemente ca fiind NA pentru a indica incompletitudinea
-  p_XY_comuna[sample(m * n, m * n * 0.3)] <- NA
-  p_X_marginal[sample(m, m * 0.3)] <- NA
-  p_Y_marginal[sample(n, n * 0.3)] <- NA
+  # Rotunjiți valorile la 3 zecimale
+  repartitie_comuna[sample(m * n, m * n * 0.3)] <- NA
+  rep_marginal_x[sample(m, m * 0.3)] <- NA
+  rep_marginal_y[sample(n, n * 0.3)] <- NA
   
-  
-  return(list(p_XY_comuna = p_XY_comuna, p_X_marginal = p_X_marginal, p_Y_marginal = p_Y_marginal))
+  return(list(repartitie_comuna = repartitie_comuna, rep_marginal_x = rep_marginal_x, rep_marginal_y = rep_marginal_y))
 }
 
-# Exemplu de utilizare
-rezultate_incomplete_cu_zecimale_normalizat <- frepcomgen(3, 4)
-print(rezultate_incomplete_cu_zecimale_normalizat$p_XY_comuna)
-print(rezultate_incomplete_cu_zecimale_normalizat$p_X_marginal)
-print(rezultate_incomplete_cu_zecimale_normalizat$p_Y_marginal)
+# Specificați dimensiunile matricei dorite (de exemplu, n = 5, m = 5)
+n <- 5
+m <- 5
+rezultat <- frepcomgen(n, m)
 
+# Afișați rezultatele rotunjite la 3 zecimale
+print("Repartitie comuna (matrice):")
+print(rezultat$repartitie_comuna)
+
+print("Repartitie marginala pe x (sume normalizate):")
+print(rezultat$rep_marginal_x)
+
+print("Repartitie marginala pe y (sume normalizate):")
+print(rezultat$rep_marginal_y)
