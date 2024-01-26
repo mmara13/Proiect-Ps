@@ -1,8 +1,8 @@
 frepcomgen <- function(n, m) {
-  # Creați o matrice n x m cu valori aleatoare între 0 și 1
+  # Creaza o matrice n x m cu valori aleatoare între 0 și 1
   repartitie_comuna <- matrix(runif(n * m), nrow = n, ncol = m)
   
-  # Normalizați valorile astfel încât suma tuturor valorilor să fie 1
+  # Normalizeaza valorile astfel încât suma tuturor valorilor să fie 1
   repartitie_comuna <- repartitie_comuna / sum(repartitie_comuna)
   repartitie_comuna <- round(repartitie_comuna, 3)
   
@@ -10,11 +10,11 @@ frepcomgen <- function(n, m) {
   rep_marginal_x <- round(rowSums(repartitie_comuna), 3)
   rep_marginal_y <- round(colSums(repartitie_comuna), 3)
   
-  # Normalizați sumele pentru fiecare linie și fiecare coloană astfel încât ele să fie 1
+  # Normalizaeaza sumele pentru fiecare linie și fiecare coloană astfel încât ele să fie 1
   rep_marginal_x <- round(rep_marginal_x / sum(rep_marginal_x),3)
   rep_marginal_y <- round(rep_marginal_y / sum(rep_marginal_y),3)
   
-  # Rotunjiți valorile la 3 zecimale
+  # round valorile la 3 zecimale
   repartitie_comuna[sample(m * n, m * n * 0.3)] <- NA
   rep_marginal_x[sample(m, m * 0.3)] <- NA
   rep_marginal_y[sample(n, n * 0.3)] <- NA
@@ -22,7 +22,7 @@ frepcomgen <- function(n, m) {
   return(list(repartitie_comuna = repartitie_comuna, rep_marginal_x = rep_marginal_x, rep_marginal_y = rep_marginal_y))
 }
 
-# Specificați dimensiunile matricei dorite (de exemplu, n = 5, m = 5)
+# Specificați dimensiunile matricei dorite 
 n <- 5
 m <- 5
 rezultat <- frepcomgen(n, m)
