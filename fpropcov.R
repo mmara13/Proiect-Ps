@@ -1,3 +1,24 @@
+# Utilizați repartiția comună și repartițiile marginale
+fpropcov <- function(a, b, c, d, repartitie_comuna, rep_marginal_x, rep_marginal_y) {
+  # Calculați varianțele pentru X și Y
+  var_x <- sum(rep_marginal_x * seq_along(rep_marginal_x))
+  var_y <- sum(rep_marginal_y * seq_along(rep_marginal_y))
+  
+  # Calculați E[X], E[Y] și E[X*Y]
+  medie_x <- sum(rep_marginal_x * seq_along(rep_marginal_x))
+  medie_y <- sum(rep_marginal_y * seq_along(rep_marginal_y))
+  medie_xy <- sum(repartitie_comuna * (seq_along(rep_marginal_x) %*% t(seq_along(rep_marginal_y))))
+  
+  # Calculează covarianța utilizând formula cov(X,Y) = E[X*Y] - E[X]*E[Y]
+  cov_xy <- round(medie_xy - medie_x * medie_y,3)
+  
+  # Covarianța pentru Z și T
+  # cov(Z,T) = cov(a*X+b*Y,c*X+d*Y) = a*c*Var(X) + b*c*cov(X,Y) + b*d*Var(Y)
+  cov_zt <- a * c * var_x + b * c * cov_xy + b * d * var_y
+  
+  return(cov_zt)
+}
+
 # Construiti repartitia comuna si repartitiile marginale
 # Specificați dimensiunile matricei dorite 
 n <- 5
@@ -32,27 +53,6 @@ print(rep_marginal_x)
 
 print("Repartitie marginala pe y (sume normalizate):")
 print(rep_marginal_y)
-
-# Utilizați repartiția comună și repartițiile marginale
-fpropcov <- function(a, b, c, d, repartitie_comuna, rep_marginal_x, rep_marginal_y) {
-  # Calculați varianțele pentru X și Y
-  var_x <- sum(rep_marginal_x * seq_along(rep_marginal_x))
-  var_y <- sum(rep_marginal_y * seq_along(rep_marginal_y))
-  
-  # Calculați E[X], E[Y] și E[X*Y]
-  medie_x <- sum(rep_marginal_x * seq_along(rep_marginal_x))
-  medie_y <- sum(rep_marginal_y * seq_along(rep_marginal_y))
-  medie_xy <- sum(repartitie_comuna * (seq_along(rep_marginal_x) %*% t(seq_along(rep_marginal_y))))
-  
-  # Calculează covarianța utilizând formula cov(X,Y) = E[X*Y] - E[X]*E[Y]
-  cov_xy <- round(medie_xy - medie_x * medie_y,3)
-  
-  # Covarianța pentru Z și T
-  # cov(Z,T) = cov(a*X+b*Y,c*X+d*Y) = a*c*Var(X) + b*c*cov(X,Y) + b*d*Var(Y)
-  cov_zt <- a * c * var_x + b * c * cov_xy + b * d * var_y
-  
-  return(cov_zt)
-}
 
 # Exemplu de utilizare pentru fpropcov
 a <- 2
