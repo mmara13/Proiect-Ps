@@ -1,3 +1,4 @@
+
 # Utilizați repartiția comună și repartițiile marginale
 fpropcov <- function(a, b, c, d, repartitie_comuna, rep_marginal_x, rep_marginal_y) {
   # Calculați varianțele pentru X și Y
