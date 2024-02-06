@@ -31,8 +31,8 @@ rezultat <- frepcomgen(n, m)
 print("Repartitie comuna (matrice):")
 print(rezultat$repartitie_comuna)
 
-print("Repartitie marginala pe x (sume normalizate):")
+print("Repartitie marginala pe x :")
 print(rezultat$rep_marginal_x)
 
-print("Repartitie marginala pe y (sume normalizate):")
+print("Repartitie marginala pe y :")
 print(rezultat$rep_marginal_y)
