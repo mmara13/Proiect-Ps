@@ -8,6 +8,9 @@ fvernecor <- function(repartitie_comuna, rep_marginal_x, rep_marginal_y){
   if(covarianta == 0){
     print("Variabilele sunt necorelate")
   }
+  else{
+    print("Variabilele sunt corelate")
+  }
 }
 
 fvernecor(rezultat_completat$repartitie_comuna, rezultat_completat$rep_marginal_x, rezultat_completat$rep_marginal_y)
