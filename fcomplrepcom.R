@@ -21,8 +21,8 @@ rezultat_completat <- fcomplrepcom(rezultat_reconstruit)
 print("Repartitie comuna completata (matrice):")
 print(rezultat_completat$repartitie_comuna)
 
-print("Repartitie marginala pe x completata (sume normalizate):")
+print("Repartitie marginala pe x completata :")
 print(rezultat_completat$rep_marginal_x)
 
-print("Repartitie marginala pe y completata (sume normalizate):")
+print("Repartitie marginala pe y completata :")
 print(rezultat_completat$rep_marginal_y)
