@@ -18,7 +18,7 @@ frepmarginal <- function(repartitie_comuna, rep_marginal_x, rep_marginal_y) {
   return(list(repartitie_comuna = repartitie_comuna_completata, rep_marginal_x = rep_marginal_x_completat, rep_marginal_y = rep_marginal_y_completat))
 }
 
-reconstrui_repartitie <- function(rezultat) {
+reconstruire_repartitie <- function(rezultat) {
   # Extrageți componentele din rezultat
   repartitie_comuna <- rezultat$repartitie_comuna
   rep_marginal_x <- rezultat$rep_marginal_x
@@ -37,9 +37,9 @@ rezultat_reconstruit <- reconstrui_repartitie(rezultat)
 print("Repartitie comuna reconstruita (matrice):")
 print(rezultat_reconstruit$repartitie_comuna)
 
-print("Repartitie marginala pe x reconstruita (sume normalizate):")
+print("Repartitie marginala pe x reconstruita :")
 print(rezultat_reconstruit$rep_marginal_x)
 
-print("Repartitie marginala pe y reconstruita (sume normalizate):")
+print("Repartitie marginala pe y reconstruita :")
 print(rezultat_reconstruit$rep_marginal_y)
 
