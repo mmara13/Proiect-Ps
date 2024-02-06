@@ -1,5 +1,5 @@
 # Utilizați rezultatele de la punctul b) : rezultat_completat$repartitie_comuna, rezultat_completat$rep_marginal_x, rezultat_completat$rep_marginal_y
-# fverind
+
 fverind <- function(repartitie_comuna, rep_marginal_x, rep_marginal_y){
   # X și Y sunt independente dacă și numai dacă xi * yj = rij
   sunt_independente <- 1
